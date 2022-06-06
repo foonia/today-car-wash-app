@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.test.board.front.model"/>
+        <package name="com.test.board.admin.model"/>
+    </typeAliases>
+    <mappers>
+        <!-- FRONT -->
+        <mapper resource="mybatis/sql/front/BoardMapper.xml"/>
+        <mapper resource="mybatis/sql/front/UserMapper.xml"/>
+        <mapper resource="mybatis/sql/front/QnAMapper.xml"/>
+
+        <!-- ADMIN -->
+        <mapper resource="mybatis/sql/admin/AdminUserMapper.xml"/>
+        <mapper resource="mybatis/sql/admin/AuthMapper.xml"/>
+    </mappers>
+</configuration>
