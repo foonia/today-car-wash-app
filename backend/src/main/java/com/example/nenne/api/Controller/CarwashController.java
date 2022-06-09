@@ -25,15 +25,16 @@ public class CarwashController {
 		  UserProfile("3", "홍길남", "3333-3333", "서울시 강남구 대치3동"));
 	}*/
 
-    @GetMapping(value = "/api/car-wash", produces = MediaType.APPLICATION_JSON_VALUE)	//localhost:8080/user/id
-    public CarwashEntity getUserProfile(@RequestParam("latitude") String latitude, @RequestParam("longtitude") String longtitude) {
+    @GetMapping(value = "/api/test", produces = MediaType.APPLICATION_JSON_VALUE)	//localhost:8080/api/car-wash
+    public CarwashEntity getCarwashProfile(@RequestParam("latitude") String latitude, @RequestParam("longtitude") String longtitude) {
         return mapper.getCarwash(latitude, longtitude);
         //return userMap.get(id);
     }
 
-    @GetMapping("/api/all")
-    public List<CarwashEntity> getUserProfileList() {
-        return mapper.getCarwashList();
+    @GetMapping("/api/car-wash")
+    public List<CarwashEntity> getUserProfileList(@RequestParam("latitude") String latitude, @RequestParam("longtitude") String longtitude,
+                                                  @RequestParam(value = "distance",required = false,defaultValue = "10") String distance) {
+        return mapper.getCarwashList(latitude, longtitude, distance);
         //return new ArrayList<UserProfile>(userMap.values());
     }
 /*
