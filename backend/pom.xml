@@ -53,6 +53,7 @@
 				<directory>src/main/resources/application-${env}</directory>
 			</resource>
 		</resources>
+		<defaultGoal>install</defaultGoal>
 
 		<plugins>
 			<plugin>
