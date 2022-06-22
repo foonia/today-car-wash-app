@@ -1,31 +1,36 @@
 package com.example.nenne.api.Entity;
 
+import lombok.Data;
+import org.springframework.http.HttpStatus;
+
+
 public class CarwashEntity {
 
-    private Integer idx;
+
+    private String idx;
     private String name;
     private String address;
     private String latitude;
     private String longtitude;
-    private Integer num;
-    private Double distance;
+    private String type;
+    private String distance;
 
-    public CarwashEntity(Integer idx, String name, String address, String latitude,
-                         String longtitude, Integer num, Double distance) {
+    public CarwashEntity(String idx, String name, String address, String latitude,
+                         String longtitude, String type, String distance) {
         super();
         this.idx = idx;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longtitude = longtitude;
-        this.num = num;
+        this.type = type;
         this.distance = distance;
     }
 
-    public Integer getIdx() {
+    public String getIdx() {
         return idx;
     }
-    public void setIdx(Integer idx) {
+    public void setIdx(String idx) {
         this.idx = idx;
     }
     public String getName() {
@@ -52,17 +57,14 @@ public class CarwashEntity {
     public void setLongtitude(String longtitude) {
         this.longtitude = longtitude;
     }
-    public Integer getNum() {
-        return num;
+    public String gettype() { return type; }
+    public void settype(String type) {
+        this.type = type;
     }
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-    public Double getDistance() {
+    public String getDistance() {
         return distance;
     }
-    public void setDistance(Double distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
-
 }

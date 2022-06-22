@@ -53,7 +53,6 @@ public class ApiExceptionAdvice {
         return ResponseEntity
                 .status(ExceptionEnum.INTERNAL_SERVER_ERROR.getStatus())
                 .body(ApiExceptionEntity.builder()
-                        .Timestamp(LocalDateTime.now())
                         .errorCode(ExceptionEnum.INTERNAL_SERVER_ERROR.getCode())
                         .errorMessage(e.getMessage())
                         .build());

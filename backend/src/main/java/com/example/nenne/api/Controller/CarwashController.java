@@ -3,8 +3,10 @@ package com.example.nenne.api.Controller;
 import com.example.nenne.api.ApiException.ApiException;
 import com.example.nenne.api.ApiException.ExceptionEnum;
 import com.example.nenne.api.Entity.CarwashEntity;
+import com.example.nenne.api.Entity.CarwashResponse;
 import com.example.nenne.api.Mapper.CarwashMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +46,7 @@ public class CarwashController{
     }
 
 
-    @GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CarwashEntity> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longtitude") String longtitude,
                                                   @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
                                                   @RequestHeader(value = "x-api-key") String key) {
@@ -57,11 +59,28 @@ public class CarwashController{
 
         return mapper.getCarwashList(latitude, longtitude, distance);
 
-        //assertThat(key_value).isEqualTo(key);
-        //return mapper.getCarwashList(latitude, longtitude, distance);
-        //throw new ApiException(ExceptionEnum.INTERNAL_SERVER_ERROR);
+    }*/
+
+    @GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
+    public org.springframework.http.ResponseEntity<CarwashResponse> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longtitude") String longtitude,
+                                                                                       @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
+                                                                                       @RequestHeader(value = "x-api-key") String key) {
+
+        CarwashResponse carwashResponse = new CarwashResponse();
+        List<CarwashEntity> carwashList = mapper.getCarwashList(latitude, longtitude, distance);
+        try{
+            assertThat(key_value).isEqualTo(key);
+        }catch (AssertionError e){
+            throw new ApiException(ExceptionEnum.INTERNAL_SERVER_ERROR);
+        }
+
+        carwashResponse.setStatus(HttpStatus.OK);
+        carwashResponse.setCode("200");
+        carwashResponse.setData(carwashList);
 
 
+
+        return new org.springframework.http.ResponseEntity<>(carwashResponse,HttpStatus.OK);
     }
 
 

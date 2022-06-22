@@ -9,14 +9,14 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface CarwashMapper {
-    @Select("select idx,name,address,latitude,longtitude,num,(6371*acos(cos(radians(#{latitude}))*cos(radians(LATITUDE))*cos(radians(LONGTITUDE)-radians(#{longtitude})) \n" +
+    @Select("select idx,name,address,latitude,longtitude,type,(6371*acos(cos(radians(#{latitude}))*cos(radians(LATITUDE))*cos(radians(LONGTITUDE)-radians(#{longtitude})) \n" +
             "+sin(radians(#{latitude}))*sin(radians(LATITUDE)))) AS distance\n" +
             "from carwash\n" +
             "having distance < 10\n" +
             "order by distance DESC;")
     CarwashEntity getCarwash(@Param("latitude") String latitude, @Param("longtitude") String longtitude);
 
-    @Select("select idx,name,address,latitude,longtitude,num,(6371*acos(cos(radians(#{latitude}))*cos(radians(LATITUDE))*cos(radians(LONGTITUDE)-radians(#{longtitude})) \n" +
+    @Select("select idx,name,address,latitude,longtitude,type,(6371*acos(cos(radians(#{latitude}))*cos(radians(LATITUDE))*cos(radians(LONGTITUDE)-radians(#{longtitude})) \n" +
             "+sin(radians(#{latitude}))*sin(radians(LATITUDE)))) AS DISTANCE\n" +
             "from carwash\n" +
             "having DISTANCE < #{distance}\n" +
