@@ -1,17 +1,29 @@
 package com.example.nenne.api.Controller;
 
+import com.example.nenne.api.ApiException.ApiException;
+import com.example.nenne.api.ApiException.ExceptionEnum;
 import com.example.nenne.api.Entity.CarwashEntity;
 import com.example.nenne.api.Mapper.CarwashMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
+@Validated
 @RestController
-public class CarwashController {
+public class CarwashController{
     //private Map<String, UserProfile> userMap;
     private CarwashMapper mapper;
+
+    @Value("${key.value}")
+    private String key_value;
 
     public CarwashController(CarwashMapper mapper) {
         this.mapper = mapper;
@@ -31,12 +43,28 @@ public class CarwashController {
         //return userMap.get(id);
     }
 
-    @GetMapping("/api/car-wash")
-    public List<CarwashEntity> getUserProfileList(@RequestParam("latitude") String latitude, @RequestParam("longtitude") String longtitude,
-                                                  @RequestParam(value = "distance",required = false,defaultValue = "10") String distance) {
+
+    @GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CarwashEntity> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longtitude") String longtitude,
+                                                  @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
+                                                  @RequestHeader(value = "x-api-key") String key) {
+
+        try{
+            assertThat(key_value).isEqualTo(key);
+        }catch (AssertionError e){
+            throw new ApiException(ExceptionEnum.INTERNAL_SERVER_ERROR);
+        }
+
         return mapper.getCarwashList(latitude, longtitude, distance);
-        //return new ArrayList<UserProfile>(userMap.values());
+
+        //assertThat(key_value).isEqualTo(key);
+        //return mapper.getCarwashList(latitude, longtitude, distance);
+        //throw new ApiException(ExceptionEnum.INTERNAL_SERVER_ERROR);
+
+
     }
+
+
 /*
     @PutMapping("/user/{id}")
     public void putUserProfile(@PathVariable("id") String id,
