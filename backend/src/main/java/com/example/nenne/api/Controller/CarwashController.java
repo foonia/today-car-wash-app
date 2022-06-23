@@ -40,14 +40,14 @@ public class CarwashController{
 	}*/
 
     @GetMapping(value = "/api/test", produces = MediaType.APPLICATION_JSON_VALUE)	//localhost:8080/api/car-wash
-    public CarwashEntity getCarwashProfile(@RequestParam("latitude") String latitude, @RequestParam("longtitude") String longtitude) {
-        return mapper.getCarwash(latitude, longtitude);
+    public CarwashEntity getCarwashProfile(@RequestParam("latitude") String latitude, @RequestParam("longitude") String longitude) {
+        return mapper.getCarwash(latitude, longitude);
         //return userMap.get(id);
     }
 
 
     /*@GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CarwashEntity> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longtitude") String longtitude,
+    public List<CarwashEntity> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longitude") String longitude,
                                                   @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
                                                   @RequestHeader(value = "x-api-key") String key) {
 
@@ -57,17 +57,17 @@ public class CarwashController{
             throw new ApiException(ExceptionEnum.INTERNAL_SERVER_ERROR);
         }
 
-        return mapper.getCarwashList(latitude, longtitude, distance);
+        return mapper.getCarwashList(latitude, longitude, distance);
 
     }*/
 
     @GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
-    public org.springframework.http.ResponseEntity<CarwashResponse> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longtitude") String longtitude,
+    public org.springframework.http.ResponseEntity<CarwashResponse> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longitude") String longitude,
                                                                                        @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
                                                                                        @RequestHeader(value = "x-api-key") String key) {
 
         CarwashResponse carwashResponse = new CarwashResponse();
-        List<CarwashEntity> carwashList = mapper.getCarwashList(latitude, longtitude, distance);
+        List<CarwashEntity> carwashList = mapper.getCarwashList(latitude, longitude, distance);
         try{
             assertThat(key_value).isEqualTo(key);
         }catch (AssertionError e){

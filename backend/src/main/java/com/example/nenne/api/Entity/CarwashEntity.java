@@ -11,18 +11,18 @@ public class CarwashEntity {
     private String name;
     private String address;
     private String latitude;
-    private String longtitude;
+    private String longitude;
     private String type;
     private String distance;
 
     public CarwashEntity(String idx, String name, String address, String latitude,
-                         String longtitude, String type, String distance) {
+                         String longitude, String type, String distance) {
         super();
         this.idx = idx;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
-        this.longtitude = longtitude;
+        this.longitude = longitude;
         this.type = type;
         this.distance = distance;
     }
@@ -51,11 +51,11 @@ public class CarwashEntity {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-    public String getLongtitude() {
-        return longtitude;
+    public String getlongitude() {
+        return longitude;
     }
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
+    public void setlongitude(String longitude) {
+        this.longitude = longitude;
     }
     public String gettype() { return type; }
     public void settype(String type) {
