@@ -8,6 +8,7 @@ import com.example.nenne.api.Mapper.CarwashMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -45,7 +46,6 @@ public class CarwashController{
         //return userMap.get(id);
     }
 
-
     /*@GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CarwashEntity> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longitude") String longitude,
                                                   @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
@@ -62,7 +62,7 @@ public class CarwashController{
     }*/
 
     @GetMapping(value = "/api/car-wash",produces = MediaType.APPLICATION_JSON_VALUE)
-    public org.springframework.http.ResponseEntity<CarwashResponse> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longitude") String longitude,
+    public ResponseEntity<CarwashResponse> getUserProfileList(@RequestParam(value = "latitude") String latitude, @RequestParam("longitude") String longitude,
                                                                                        @RequestParam(value = "distance",required = false,defaultValue = "10") String distance,
                                                                                        @RequestHeader(value = "x-api-key") String key) {
 
@@ -76,11 +76,9 @@ public class CarwashController{
 
         carwashResponse.setStatus(HttpStatus.OK);
         carwashResponse.setCode("200");
-        carwashResponse.setData(carwashList);
+        carwashResponse.setItems(carwashList);
 
-
-
-        return new org.springframework.http.ResponseEntity<>(carwashResponse,HttpStatus.OK);
+        return new ResponseEntity<>(carwashResponse,HttpStatus.OK);
     }
 
 

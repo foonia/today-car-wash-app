@@ -4,16 +4,16 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
-public class CarwashResponse {
+public class ImageResponse {
 
-    private String code;
     private HttpStatus status;
+    private String code;
     private Object items;
 
-    public CarwashResponse() {
+    public ImageResponse() {
         this.status = null;
         this.code = null;
         this.items = null;
-    }
 
+    }
 }
